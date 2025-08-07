@@ -23,7 +23,7 @@ document.querySelectorAll(".btn").forEach(btn => {
 function nextSequence() {
   userClickedPattern = [];
   level++;
-  document.getElementById("level-title").innerText = "Level " + level;
+  document.getElementById("level-title").textContent = "Level " + level;
   const randomColor = buttonColors[Math.floor(Math.random() * 4)];
   gamePattern.push(randomColor);
   flashButton(randomColor);
@@ -45,7 +45,7 @@ function checkAnswer(currentLevel) {
       setTimeout(nextSequence, 1000);
     }
   } else {
-    document.getElementById("level-title").innerText = "Game Over! Press Any Key to Restart";
+    document.getElementById("level-title").textContent = "Game Over! Press Any Key to Restart";
     startOver();
   }
 }
