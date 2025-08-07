@@ -1,57 +1,32 @@
-const buttonColors = ["red", "blue", "green", "yellow"];
-let gamePattern = [];
-let userClickedPattern = [];
-let started = false;
-let level = 0;
-
-document.addEventListener("keydown", () => {
-  if (!started) {
-    nextSequence();
-    started = true;
-  }
-});
-
-document.querySelectorAll(".btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const userChosenColor = btn.id;
-    userClickedPattern.push(userChosenColor);
-    animatePress(userChosenColor);
-    checkAnswer(userClickedPattern.length - 1);
-  });
-});
-
-function nextSequence() {
-  userClickedPattern = [];
-  level++;
-  document.getElementById("level-title").textContent = `Level ${level}`;
-  const randomColor = buttonColors[Math.floor(Math.random() * 4)];
-  gamePattern.push(randomColor);
-  flashButton(randomColor);
+body {
+  text-align: center;
+  background-color: #011F3F;
+  color: white;
+  font-family: sans-serif;
 }
 
-function flashButton(color) {
-  const btn = document.getElementById(color);
-  btn.classList.add("pressed");
-  setTimeout(() => btn.classList.remove("pressed"), 300);
+.container {
+  margin: 50px auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-function animatePress(color) {
-  flashButton(color);
+.btn {
+  height: 140px;
+  width: 140px;
+  margin: 10px;
+  border-radius: 20%;
+  cursor: pointer;
+  opacity: 0.8;
 }
 
-function checkAnswer(currentLevel) {
-  if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
-    if (userClickedPattern.length === gamePattern.length) {
-      setTimeout(nextSequence, 1000);
-    }
-  } else {
-    document.getElementById("level-title").textContent = "Game Over! Press Any Key to Restart";
-    startOver();
-  }
-}
+.green { background-color: green; }
+.red    { background-color: red; }
+.yellow { background-color: yellow; }
+.blue   { background-color: blue; }
 
-function startOver() {
-  level = 0;
-  gamePattern = [];
-  started = false;
+.pressed {
+  box-shadow: 0 0 20px white;
+  opacity: 1;
 }
