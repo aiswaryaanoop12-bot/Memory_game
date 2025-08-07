@@ -6,13 +6,14 @@ let level = 0;
 
 document.addEventListener("keydown", () => {
   if (!started) {
+    document.getElementById("level-title").textContent = "Level " + level;
     nextSequence();
     started = true;
   }
 });
 
-document.querySelectorAll(".btn").forEach(button => {
-  button.addEventListener("click", function () {
+document.querySelectorAll(".btn").forEach(btn => {
+  btn.addEventListener("click", function () {
     const userChosenColor = this.id;
     userClickedPattern.push(userChosenColor);
     animatePress(userChosenColor);
@@ -23,22 +24,23 @@ document.querySelectorAll(".btn").forEach(button => {
 function nextSequence() {
   userClickedPattern = [];
   level++;
-  document.getElementById("level-title").innerText = "Level " + level;
-  const randomChosenColor = buttonColors[Math.floor(Math.random() * 4)];
+  document.getElementById("level-title").textContent = "Level " + level;
+
+  const randomNumber = Math.floor(Math.random() * 4);
+  const randomChosenColor = buttonColors[randomNumber];
   gamePattern.push(randomChosenColor);
+
   flashButton(randomChosenColor);
 }
 
-function flashButton(name) {
-  const btn = document.getElementById(name);
+function flashButton(color) {
+  const btn = document.getElementById(color);
   btn.classList.add("pressed");
-  setTimeout(() => btn.classList.remove("pressed"), 300);
+  setTimeout(() => btn.classList.remove("pressed"), 200);
 }
 
 function animatePress(currentColor) {
-  const btn = document.getElementById(currentColor);
-  btn.classList.add("pressed");
-  setTimeout(() => btn.classList.remove("pressed"), 200);
+  flashButton(currentColor);
 }
 
 function checkAnswer(currentLevel) {
@@ -47,7 +49,10 @@ function checkAnswer(currentLevel) {
       setTimeout(nextSequence, 1000);
     }
   } else {
-    document.getElementById("level-title").innerText = "Game Over! Press Any Key to Restart";
+    document.getElementById("level-title").textContent = "Game Over! Press Any Key to Restart";
+    document.body.classList.add("game-over");
+    setTimeout(() => document.body.classList.remove("game-over"), 200);
+
     startOver();
   }
 }
