@@ -1,25 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Memory Game</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+body {
+  text-align: center;
+  background-color: #011F3F;
+  font-family: sans-serif;
+  color: white;
+}
 
-  <h1 id="level-title">Press Any Key to Start</h1>
+h1 {
+  font-size: 3rem;
+  margin: 20px;
+}
 
-  <div class="container">
-    <div class="row">
-      <div type="button" id="green" class="btn green"></div>
-      <div type="button" id="red" class="btn red"></div>
-    </div>
-    <div class="row">
-      <div type="button" id="yellow" class="btn yellow"></div>
-      <div type="button" id="blue" class="btn blue"></div>
-    </div>
-  </div>
+.container {
+  margin: auto;
+  width: 50%;
+}
 
-  <script src="script.js"></script>
-</body>
-</html>
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  height: 200px;
+  width: 200px;
+  margin: 10px;
+  border-radius: 20%;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.green { background-color: green; }
+.red { background-color: red; }
+.yellow { background-color: yellow; }
+.blue { background-color: blue; }
+
+.pressed {
+  box-shadow: 0 0 20px white;
+  opacity: 1;
+}
