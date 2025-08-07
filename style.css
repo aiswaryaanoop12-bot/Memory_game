@@ -1,8 +1,44 @@
-body { text-align: center; background-color: #000; color: white; font-family: sans-serif; }
-.container { margin: 50px auto; width: 300px; display: flex; flex-wrap: wrap; }
-.btn { height: 140px; width: 140px; margin: 10px; border-radius: 20px; cursor: pointer; }
-.red { background-color: red; }
-.blue { background-color: blue; }
-.green { background-color: green; }
-.yellow { background-color: yellow; }
-.pressed { box-shadow: 0 0 20px white; opacity: 0.5; }
+
+body {
+  text-align: center;
+  background-color: #000;
+  color: white;
+  font-family: sans-serif;
+}
+
+.container {
+  margin: 50px auto;
+  width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn {
+  height: 140px;
+  width: 140px;
+  margin: 10px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.red {
+  background-color: red;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.green {
+  background-color: green;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.pressed {
+  box-shadow: 0 0 20px white;
+  opacity: 0.5;
+}
