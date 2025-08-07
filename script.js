@@ -6,7 +6,6 @@ let level = 0;
 
 document.addEventListener("keydown", () => {
   if (!started) {
-    document.getElementById("level-title").textContent = "Level " + level;
     nextSequence();
     started = true;
   }
@@ -24,23 +23,20 @@ document.querySelectorAll(".btn").forEach(btn => {
 function nextSequence() {
   userClickedPattern = [];
   level++;
-  document.getElementById("level-title").textContent = "Level " + level;
-
-  const randomNumber = Math.floor(Math.random() * 4);
-  const randomChosenColor = buttonColors[randomNumber];
-  gamePattern.push(randomChosenColor);
-
-  flashButton(randomChosenColor);
+  document.getElementById("level-title").innerText = "Level " + level;
+  const randomColor = buttonColors[Math.floor(Math.random() * 4)];
+  gamePattern.push(randomColor);
+  flashButton(randomColor);
 }
 
 function flashButton(color) {
   const btn = document.getElementById(color);
   btn.classList.add("pressed");
-  setTimeout(() => btn.classList.remove("pressed"), 200);
+  setTimeout(() => btn.classList.remove("pressed"), 300);
 }
 
-function animatePress(currentColor) {
-  flashButton(currentColor);
+function animatePress(color) {
+  flashButton(color);
 }
 
 function checkAnswer(currentLevel) {
@@ -49,10 +45,7 @@ function checkAnswer(currentLevel) {
       setTimeout(nextSequence, 1000);
     }
   } else {
-    document.getElementById("level-title").textContent = "Game Over! Press Any Key to Restart";
-    document.body.classList.add("game-over");
-    setTimeout(() => document.body.classList.remove("game-over"), 200);
-
+    document.getElementById("level-title").innerText = "Game Over! Press Any Key to Restart";
     startOver();
   }
 }
