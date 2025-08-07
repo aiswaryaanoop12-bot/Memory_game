@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Memory Game</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial;
+      background: #f0f0f0;
+    }
+    .button {
+      width: 100px;
+      height: 100px;
+      margin: 10px;
+      display: inline-block;
+      border-radius: 10px;
+      opacity: 0.7;
+      transition: 0.3s;
+    }
+    .button:hover {
+      opacity: 1;
+    }
+    #red { background: red; }
+    #blue { background: blue; }
+    #green { background: green; }
+    #yellow { background: yellow; }
+  </style>
+</head>
+<body>
+  <h1>Memory Game</h1>
+  <p>Watch the pattern and repeat it!</p>
+  <div>
+    <div id="red" class="button"></div>
+    <div id="blue" class="button"></div>
+    <div id="green" class="button"></div>
+    <div id="yellow" class="button"></div>
+  </div>
+  <h2 id="level-title">Level 1</h2>
+  <script>
+    const buttons = ["red", "blue", "green", "yellow"];
+    let pattern = [];
+    let playerIndex = 0;
+    let level = 1;
+
+    function flash(button) {
+      const el = document.getElementById(button);
+      el.style.opacity = 1;
+      setTimeout(() => el.style.opacity = 0.7, 300);
+    }
+
+    function playPattern() {
+      let i = 0;
+      const interval = setInterval(() => {
+        flash(pattern[i]);
+        i++;
+        if (i >= pattern.length) clearInterval(interval);
+      }, 600);
+    }
+
+    function nextRound() {
+      document.getElementById("level-title").innerText = Level ${level};
+      const nextColor = buttons[Math.floor(Math.random() * 4)];
+      pattern.push(nextColor);
+      playPattern();
+      playerIndex = 0;
+    }
+
+    document.querySelectorAll(".button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const color = btn.id;
+        flash(color);
+        if (color === pattern[playerIndex]) {
+          playerIndex++;
+          if (playerIndex === pattern.length) {
+            level++;
+            setTimeout(nextRound, 1000);
+          }
+        } else {
+          alert("Game Over! You reached Level " + level);
+          location.reload();
+        }
+      });
+    });
+
+    nextRound();
+  </script>
+</body>
+</html>
